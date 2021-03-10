@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="style.css">
+    <header>
+        원규의 공부매드무비 타이머
+    </header>
+</head>
+<body>
+    <p>Days&nbsp;&nbsp; &nbsp; &nbsp;Hours&nbsp; &nbsp;
+        Minuites&nbsp;
+        Seconds
+    </p>
+    <input type="number" max="364" min="0" maxlength="2" id="t_d" value="0">:
+    <input type="number" max="23" min="0" maxlength="2" id="t_h" value="0">:
+    <input type="number" max="59" min="0" maxlength="2" id="t_m" value="0">:
+    <input type="number" max="59" min="0" maxlength="2" id="t_s" value="0">
+    <button id="b_s">start</button><button id="b_p">stop</button>
+    <p id="tttt" style="color: red;"></p>
+
+    <p><img src="venkyo.png" class="img1"></p>
+
+
+<script>
+
+    var td;
+    var th;
+    var tm;
+    var ts;
+    var tw;
+
+    var velocity = 2;
+
+    var clt;
+    var rlt;
+    var oneclicktimeset = 0;
+    
+    document.getElementById('b_s').addEventListener('click',function(){
+        
+    
+        td = document.getElementById('t_d').value;
+        th = document.getElementById('t_h').value;
+        tm = document.getElementById('t_m').value;
+        ts = document.getElementById('t_s').value;
+
+        tw = td*86400+th*3600+tm*60+ts*1;
+
+        clt = new Date().getTime();
+        
+        velocity = 1;
+
+    });
+    document.getElementById('b_p').addEventListener('click',function(){
+        velocity = 0;
+    });
+
+    setInterval(function(){
+
+        rlt = new Date().getTime();
+        var timer = (tw-(rlt-clt)/1000);
+        var timer_d = Math.floor(timer/86400);
+        var timer_h = Math.floor((timer-timer_d*86400)/3600);
+        var timer_m = Math.floor((timer-timer_d*86400-timer_h*3600)/60);
+        var timer_s = Math.floor((timer-timer_d*86400-timer_h*3600-timer_m*60)/1);
+
+        if(velocity == 1)
+        {
+            document.getElementById('tttt').innerHTML=
+            timer_d+"Day"+timer_h+"Hours"+timer_m+"Minutes"+timer_s+"Seconds";
+        }
+        else if(velocity == 0) 
+        {
+            var copy_d = timer_d;
+            var copy_h = timer_h;
+            var copy_m = timer_m;
+            var copy_s = timer_s;
+            document.getElementById('t_d').value = copy_d;
+            document.getElementById('t_h').value = copy_h;
+            document.getElementById('t_m').value = copy_m;
+            document.getElementById('t_s').value = copy_s;
+
+            velocity = 2;
+        }
+
+    },10);
+   
+</script>
+</body>
+</html>

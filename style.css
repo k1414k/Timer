@@ -1,0 +1,25 @@
+body{
+    text-align: center;
+    font-size: 27.5px;
+    margin-top: 150px;
+}
+
+input{
+    font-size: 40px; 
+    size: 1px;
+    padding-right: 0.1px;
+    width: 70px;
+}
+
+.img1{
+    width: 100%;
+}
+
+header{
+    text-align: center;
+    font-size: 1px;
+    font-weight: bold;
+    font-style: italic;
+    color: red;
+    margin-top: 0px;
+}
